@@ -61,7 +61,6 @@ variable "instance_type" {
 variable "key_name" {
   description = "Name of the SSH key pair"
   type        = string
-  default     = "april2026.pem"
 }
 
 variable "asg_min_size" {
