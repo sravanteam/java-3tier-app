@@ -11,9 +11,9 @@ terraform {
   
   backend "s3" {
     # Update these values according to your setup
-    # bucket = "your-terraform-state-bucket"
-    # key    = "java-app/terraform.tfstate"
-    # region = "us-east-1"
+     bucket = "first-terraform-state-bucket"
+     key    = "java-app/terraform.tfstate"
+     region = "ap-south-1"
   }
 }
 
