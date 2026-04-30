@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region to deploy resources"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1"
 }
 
 variable "environment" {
@@ -31,7 +31,7 @@ variable "private_subnets" {
 variable "availability_zones" {
   description = "Availability zones"
   type        = list(string)
-  default     = ["us-east-1a", "us-east-1b"]
+  default     = ["ap-south-1", "ap-south-1"]
 }
 
 variable "db_name" {
@@ -61,6 +61,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "Name of the SSH key pair"
   type        = string
+  default     = "april2026.pem"
 }
 
 variable "asg_min_size" {
