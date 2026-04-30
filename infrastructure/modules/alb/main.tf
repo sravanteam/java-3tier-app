@@ -1,7 +1,7 @@
 # ALB Module
 
 resource "aws_lb" "main" {
-  name               = "${var.environment}-alb-sg-${timestamp()}"
+  name               = "${var.environment}-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
@@ -10,7 +10,7 @@ resource "aws_lb" "main" {
   enable_deletion_protection = false
 
   tags = {
-    Name        = "${var.environment}-alb-sg-${timestamp()}"
+    Name        = "${var.environment}-alb"
     Environment = var.environment
   }
 }
@@ -51,7 +51,7 @@ resource "aws_lb_listener" "main" {
 }
 
 resource "aws_security_group" "alb" {
-  name        = "${var.environment}-alb-sg-${timestamp()}"
+  name        = "${var.environment}-alb"
   description = "Security group for ALB"
   vpc_id      = var.vpc_id
 
@@ -77,7 +77,7 @@ resource "aws_security_group" "alb" {
   }
 
   tags = {
-    Name        = "${var.environment}-alb-sg-${timestamp()}"
+    Name        = "${var.environment}-alb"
     Environment = var.environment
   }
 }
