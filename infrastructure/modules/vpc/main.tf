@@ -1,5 +1,10 @@
 # VPC Module
 
+# Fetch available AZs dynamically
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -26,7 +31,7 @@ resource "aws_subnet" "public" {
   count                   = length(var.public_subnets)
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnets[count.index]
-  availability_zone       = var.azs[count.index]
+  availability_zone       = data.aws_availability_zones.available.names[count.index]  # ← FIXED
   map_public_ip_on_launch = true
 
   tags = {
@@ -40,7 +45,7 @@ resource "aws_subnet" "private" {
   count             = length(var.private_subnets)
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.private_subnets[count.index]
-  availability_zone = var.azs[count.index]
+  availability_zone = data.aws_availability_zones.available.names[count.index]  # ← FIXED
 
   tags = {
     Name        = "${var.environment}-private-subnet-${count.index + 1}"
@@ -50,7 +55,7 @@ resource "aws_subnet" "private" {
 
 # Elastic IP for NAT Gateway
 resource "aws_eip" "nat" {
-  count  = length(var.public_subnets)
+  count = length(var.public_subnets)
 
   tags = {
     Name        = "${var.environment}-nat-eip-${count.index + 1}"
