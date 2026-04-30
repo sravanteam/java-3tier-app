@@ -13,7 +13,7 @@ terraform {
     # Update these values according to your setup
      bucket = "first-terraform-state-bucket"
      key    = "java-app/terraform.tfstate"
-     region = "ap-south-1"
+     region = "ap-south-1a"
   }
 }
 
