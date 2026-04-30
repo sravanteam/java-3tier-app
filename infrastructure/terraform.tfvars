@@ -5,4 +5,4 @@ public_subnets    = ["192.168.1.0/24", "192.168.2.0/24"]
 private_subnets   = ["192.168.3.0/24", "192.168.4.0/24"]
 db_username       = "admin"
 db_password       = "your-secure-password"
-key_name          = "april2026.pem"
+key_name          = "april2026"
