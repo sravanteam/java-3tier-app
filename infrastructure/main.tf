@@ -41,6 +41,21 @@ module "security" {
   allowed_ssh_cidr_blocks = var.allowed_ssh_cidr_blocks
 }
 
+# Bastion Host
+resource "aws_instance" "bastion" {
+  ami                         = "ami-07a00cf47dbbc844c"  # Ubuntu
+  instance_type               = "t3.micro"
+  key_name                    = var.key_name
+  subnet_id                   = module.vpc.public_subnet_ids[0]   # Public subnet!
+  vpc_security_group_ids      = [module.security.bastion_security_group_id]
+  associate_public_ip_address = true   # This gives it a public IP!
+
+  tags = {
+    Name        = "${var.environment}-bastion"
+    Environment = var.environment
+  }
+}
+
 # RDS Module
 module "rds" {
   source = "./modules/rds"
